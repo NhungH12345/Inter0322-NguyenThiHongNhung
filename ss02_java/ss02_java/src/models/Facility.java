@@ -1,6 +1,6 @@
 package models;
 
-public abstract class Facility {
+public class Facility {
     private String idFacility;
     private String nameService;
     private double areaUse;
