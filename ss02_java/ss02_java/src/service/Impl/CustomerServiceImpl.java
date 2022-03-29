@@ -3,6 +3,7 @@ package service.Impl;
 import models.Customer;
 import models.Employee;
 import service.Service;
+import util.ReadAndWrite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,7 @@ public class CustomerServiceImpl implements Service {
         Customer customer = new Customer(id, name, age, gender, idCard, email, typeCustomer,address);
         customerList.add(customer);// đưa vào employeeList để lưu trữ
         System.out.println("Đã thêm mới khách hàng thành công");
+        ReadAndWrite.write(customerList,"F:\\Inter0322-NguyenThiHongNhung\\ss02_java\\ss02_java\\src\\data\\Employee.csv");
 
 
     }

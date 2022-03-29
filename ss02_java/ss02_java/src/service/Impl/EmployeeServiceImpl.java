@@ -2,6 +2,7 @@ package service.Impl;
 
 import models.Employee;
 import service.Service;
+import util.ReadAndWrite;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class EmployeeServiceImpl implements Service {
     private static Scanner scanner = new Scanner(System.in);
     @Override
     public void display() {
+        employeeList = (List<Employee>) ReadAndWrite.Read("F:\\Inter0322-NguyenThiHongNhung\\ss02_java\\ss02_java\\src\\data\\Employee.csv");
         for (Employee employee:employeeList){
             System.out.println(employee.toString());
         }
@@ -42,6 +44,7 @@ public class EmployeeServiceImpl implements Service {
         int salary = Integer.parseInt(scanner.nextLine());
         Employee employee = new Employee(id, name, age, gender, idCard, email, level,position, salary);
         employeeList.add(employee);// đưa vào employeeList để lưu trữ
+        ReadAndWrite.write(employeeList, "F:\\Inter0322-NguyenThiHongNhung\\ss02_java\\ss02_java\\src\\data\\Employee.csv");
 
 
 
