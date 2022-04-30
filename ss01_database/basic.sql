@@ -208,8 +208,8 @@ SELECT * FROM hop_dong_chi_tiet;
 -- Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự
  -- “H”, “T” hoặc “K” và có tối đa 15 kí tự.  
  
- select * from nhan_vien where (ho_ten like 'H%' 
- or ho_ten like 'K%' or ho_ten like 'T%') and char_length(ho_ten) <= 15;
+--  select * from nhan_vien where (ho_ten like 'H%' 
+--  or ho_ten like 'K%' or ho_ten like 'T%') and char_length(ho_ten) <= 15;
  SELECT * from nhan_vien WHERE CAST(substring_index(ho_ten, ' ', -1) as BINARY)  
  regexp binary '^[HKT]' and CHAR_LENGTH(ho_ten)<= 15;
  
@@ -341,3 +341,9 @@ having tong_tien>10000000 )as temp set khach_hang.ma_loai_khach =(select loai_kh
 where loai_khach.ten_loai_khach="Diamond")
 where khach_hang.ma_loai_khach =(select loai_khach.ma_loai_khach from loai_khach 
 where loai_khach.ten_loai_khach="Platinum" and temp.id=khach_hang.ma_khach_hang);
+-- 19.Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
+update dich_vu_di_kem inner join (select dich_vu_di_kem.ten_dich_vu_di_kem as ten_dich_vu_di_kem from hop_dong_chi_tiet 
+inner join hop_dong_chi_tiet on dich_vu_di_kem.ma_dich_vu_di_kem = hop_dong_chi_tiet.ma_dich_vu_di_kem
+group by dich_vu_di_kem.ma_dich_vu_di_kem
+having count(hop_dong_chi_tiet.ma_dich_vu_di_kem)>3
+

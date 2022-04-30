@@ -65,10 +65,21 @@ public class CustomerTypeServlet extends HttpServlet {
         String email = request.getParameter("email");
         int id_type = Integer.parseInt(request.getParameter("id_type"));
         String address = request.getParameter("address");
+//        Type type = this.typeService.findByAll(id_type);
         Customer customer = new Customer(name, birthday, gender, phone, email, new Type(id_type), address);
-        customerService.save(customer);
-        // RequestDispatcher dispatcher=request.getRequestDispatcher("list.jsp");
-        customerList(request, response);
+        List<Customer> customerList = customerService.findAll();
+        List<Type> typeList =typeService.findByAll();
+        request.setAttribute("listType",typeList);
+        request.setAttribute("listCustomer",customerList);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/list.jsp");
+        request.setAttribute("message", "Note mới đã được thêm vào");
+        try {
+            requestDispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -113,27 +124,13 @@ public class CustomerTypeServlet extends HttpServlet {
         request.getRequestDispatcher("customer/create.jsp").forward(request, response);
     }
 
-    private void search(HttpServletRequest request, HttpServletResponse response) {
+    private void search(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
-        List<Customer> listCustomer =new ArrayList<>();
-        listCustomer =customerService.search(name);
-        List<Type> typeList =typeService.findByAll();
-        request.setAttribute("listType",typeList);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/list.jsp");
-        if (listCustomer.size()!=0){
-            request.setAttribute("listCustomer",listCustomer);
-        }else {
-            request.setAttribute("mess","không có dữ liệu nào tìm hấy");
-        }
-        try {
-            requestDispatcher.forward(request,response);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        List<Customer> customers = customerService.search(name);
+        request.setAttribute("listCustomer", customers);
+        request.getRequestDispatcher("customer/list.jsp").forward(request, response);
     }
+
 
     private void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));

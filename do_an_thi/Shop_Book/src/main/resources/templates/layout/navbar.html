@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div th:fragment="navbar">
+    <header id="header"><!--header-->
+        <div class="header_top"><!--header_top-->
+            <div class="container">
+                <div class="row" style="display:flex; justify-content: space-between;">
+                    <div class="col-sm-6 ">
+                        <div class="contactinfo">
+                            <ul class="nav nav-pills">
+                                <li><a href=""><i class="fa fa-phone"></i> +0 931 934 804</a></li>
+                                <li><a href=""><i class="fa fa-envelope"></i> hongnhung22022000@gmail.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="social-icons pull-right">
+                            <ul class="navv navbar-navv">
+                                <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                                <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                                <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                                <li><a href=""><i class="fa fa-dribbble"></i></a></li>
+                                <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--/header_top-->
+
+        <div class="header-middle"><!--header-middle-->
+            <div class="container">
+                <div class="" style="display: flex; justify-content: space-between">
+                    <div class="col-sm-4">
+                        <div class="logo pull-left">
+                            <a href=""><img style="height: 100px" src="images/home/logo.png" alt=""/></a>
+                        </div>
+                        <div class="btn-group pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default toggle usa">
+                                    VNĐ
+                                    <!--									<span class="caret"></span>-->
+                                </button>
+                                <!--								<ul class="">-->
+                                <!--									<li><a href="">Canada</a></li>-->
+                                <!--									<li><a href="">UK</a></li>-->
+                                <!--								</ul>-->
+                            </div>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default toggle usa">
+                                    DOLLAR
+
+                                </button>
+                                <!--								<ul class="">-->
+                                <!--									<li><a href="">Canadian Dollar</a></li>-->
+                                <!--									<li><a href="">Pound</a></li>-->
+                                <!--								</ul>-->
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="fix_css"
+                        style="display: flex; justify-content: space-between;margin-top: 40px;width: 310px;">
+                        <li><a href=""><i class="fa fa-user"></i> Tài Khoản</a></li>
+                        <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
+                        <li class="h-100 mr-3">
+                            <div class="dropdown">
+                                <div sec:authorize="!isAuthenticated()">
+                                    <!--<i class="fas fa-ellipsis-h mr-1" style="font-size: 25px;"></i>-->
+                                    <button id="dropdownMenuButton1" data-bs-toggle="dropdown" type="button"
+                                            data-toggle="dropdown"
+                                            style="background-color: #31b0d5;">Đăng nhập
+                                        <span class="caret" style="font-size: 16px; color: white; "></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li class="text-center">
+                                            <div class="text-login">
+                                                <i class="fa fa-lock" style="color: #fe980f;"
+                                                   aria-hidden="true"></i>
+                                                <a th:href="@{/login}">
+                                                    Đăng nhập
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <li class="text-center">
+                                            <div class="text-login">
+                                                <i class="fa fa-sign-in mr-1" style="color: #fe980f;"
+                                                   aria-hidden="true"></i>
+                                                <a th:href="@{/register}">
+                                                    Đăng ký
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div><!--/header-middle-->
+
+        <div class="header-bottom"><!--header-bottom-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                                    data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                        </div>
+                        <div class="mainmenu text-center">
+                            <ul class="nav navbar-nav collapse navbar-collapse">
+                                <!--								<li><a href="index.html">Home</a></li>-->
+                                <li><a href="@{/home}" class="active">Trang chủ</a>
+                                <li>
+                                <li><a th:href="@{/cart}">Giỏ Hàng</a></li>
+<!--                                <li><a th:href="@{/404}">404</a></li>-->
+                                <li><a th:href="@{/contact-us}">Liên Lạc</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="div_timkiem">
+                            <div class="search_lable">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input th:value="${nameP}" name="namP" class="search_input" type="text" placeholder="Tìm...">
+                                <button type="submit" class="btn-primary">Search</button>
+                            </div>
+<!--                            <form action="">-->
+<!--                                <div class="search-box">-->
+<!--                                    <i class="material-icons">&#xE8B6;</i>-->
+<!--                                    <input th:value="${nameC}" name="nameC" type="text" class="form-control"-->
+<!--                                           placeholder="Search&hellip;">-->
+<!--                                </div>-->
+<!--                            </form>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="advertisement">
+        <div class="container">
+            <!--			<img style="width: 1140px" height="350px" src="images/shop/banner.jpg" alt="" />-->
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img style="width: 1140px" height="350px" src="images/shop/banner.jpg" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img style="width: 1140px" height="350px" src="images/shop/p1.png" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img style="width: 1140px" height="350px" src="images/shop/p3.JPG" class="d-block w-100"
+                             alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <h2>Thể Loại</h2>
+                        <div class="brands-name">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li><a href=""></span>English Books</a></li>
+                                <li><a href=""></span>Sách Văn Học</a></li>
+                                <li><a href=""></span>Sách Ngoại Ngữ</a></li>
+                                <li><a href=""></span>Sách Kĩ Năng Sống</a></li>
+                                <li><a href=""></span>Sách Giáo Khoa-Giáo Trình</a></li>
+                                <li><a href=""></span>Sách Tham Khảo</a></li>
+                                <li><a href=""></span>Sách Lịch Sử</a></li>
+                                <li><a href=""></span>Sách Kiến Thức Tổng Hợp</a></li>
+                                <li><a href=""></span>Sách Tiếng Việt</a></li>
+                                <li><a href=""></span>Sách Giáo Trình</a></li>
+                                <li><a href=""></span>Sách Công Dân</a></li>
+
+                            </ul>
+                        </div>
+                        <br><!--/category-productsr-->
+
+                        <div class="brands_products"><!--brands_products-->
+                            <h2>Nhà Xuất Bản</h2>
+                            <div class="brands-name">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a href=""></span>Nhà Xuất Bản Kim Đồng</a></li>
+                                    <li><a href=""></span>Nhà Xuất Bản Trẻ</a></li>
+                                    <li><a href=""></span>Nhà Xuất Bản Văn Học</a></li>
+                                    <li><a href=""></span>Nhà xuất Bản giáo dục</a></li>
+                                    <li><a href=""></span>Nhà xuất Bản Thanh Niên</a></li>
+                                    <li><a href=""></span>Nhà xuất Bản Hồng Đức</a></li>
+                                    <li><a href=""></span>Nhà xuất Bản Đà Nẵng</a></li>
+                                    <li><a href=""></span>Nhà xuất Bản Hội Nhà Văn</a></li>
+                                    <li><a href=""></span>Nhà xuất Bản Cambridge University</a></li>
+                                    <li><a href=""></span>Nhà xuất Bản Phương Đông</a></li>
+                                </ul>
+                            </div>
+                        </div><!--/brands_products-->
+
+                        <!--						<div class="price-range">&lt;!&ndash;price-range&ndash;&gt;-->
+                        <!--							<h2>Price Range</h2>-->
+                        <!--							<div class="well">-->
+                        <!--								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />-->
+                        <!--								 <b>$ 0</b> <b class="pull-right">$ 600</b>-->
+                        <!--							</div>-->
+                        <!--						</div>&lt;!&ndash;/price-range&ndash;&gt;-->
+
+                        <div class="shipping text-center"><!--shipping-->
+                            <img src="images/home/shipping.jpg" alt=""/>
+                        </div><!--/shipping-->
+
+                    </div>
+                </div>
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h1 style="color: deepskyblue" class="title text-center">Tất cả sản phẩm</h1>
+                        <div th:each="product:${products}" class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="">
+                                    <div class="productinfo text-center">
+                                        <!--                                            <img style="height: 260px" src="images/shop/product3.jpg" alt="" />-->
+                                        <img th:src="@{${'/images/avatar/'+product.avatar}}" alt=""
+                                             style="height: 283px"/>
+                                        <h4 style="font-weight: 700;" th:text="${product.name}"></h4>
+                                        <h3 style="color: #5BBCEC" th:text="${product.price + ' VNĐ'}"></h3>
+<!--                                        <a th:href="@{/details}" class="btn btn-default add-to-cart"></i>Chi-->
+<!--                                            tiết sản phẩm</a>-->
+                                        <a class="btn btn-warning" type="submit" role="button" th:href="@{/details/__${product.id}__ } ">Chi tiết sản phẩm</a></td>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+
+
+<!--                                <ul class="pagination">-->
+<!--                                    <nav aria-label="Page navigation example">-->
+<!--                                        <ul class="pagination justify-content-center">-->
+<!--                                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>-->
+<!--                                            <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                                            <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                                            <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                                            <li class="page-item"><a class="page-link" href="#">Next</a></li>-->
+<!--                                        </ul>-->
+<!--                                        &lt;!&ndash;						</nav>&ndash;&gt;-->
+<!--                                    </nav>-->
+<!--                                </ul>-->
+                            </div><!--features_items-->
+                        </div>
+                    </div>
+
+                </div>
+                <ul class="pagination">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                        <!--						</nav>-->
+                    </nav>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+</section>
+</div>
+</body>
+</html>

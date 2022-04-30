@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/nha/css/register.css">
+    <title>Register Page</title>
+</head>
+
+<body>
+<div class="register">
+
+    <div class="register__form-background">
+        <div class="register__form-img">
+            <img src="/images/shop/Logo-Neffex.png"/>
+        </div>
+        <h1 class="register__form-title" >ĐĂNG KÝ TÀI KHOẢN</h1>
+        <form th:action="@{/register}" th:object="${registry}" method="post">
+<!--            <h3 style="color: yellow; text-align: center" >PERSONAL INFORMATION</h3>-->
+            <div style="display: flex">
+                <div>
+                    <h3 style="color: yellow; text-align: center" >THÔNG TIN CÁ NHÂN</h3>
+                    <div class="form__register-content">
+
+                        <div class="form__field">
+                            <input type="text" class="form__field-input" placeholder=" " th:field="*{firstName}" autofocus>
+                            <label class="form__field-label" >Tên đầu tiên</label>
+                        </div>
+
+                    </div>
+                    <div class="form__register-content">
+                        <div class="form__field">
+
+                            <input type="text" class="form__field-input"  placeholder=" " th:field="*{lastName}" autofocus>
+                            <label class="form__field-label" >Họ</label>
+                        </div>
+                    </div>
+                    <div class="form__register-content">
+                        <div class="form__field">
+                            <!--                <p class="form__field-error" style="color: red;font-size: 13px">Email đã tồn tại trong hệ thống</p>-->
+                            <input type="text"  class="form__field-input"  placeholder=" " th:field="*{email}" autofocus>
+                            <label class="form__field-label" >Địa chỉ Email</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: yellow; text-align: center" >ĐĂNG NHẬP THÔNG TIN</h3>
+                    <div class="form__register-content">
+                        <div class="form__field">
+                            <input type="password"  class="form__field-input"  placeholder=" " th:field="*{password}">
+                            <label class="form__field-label" >Mật khẩu</label>
+                        </div>
+                    </div>
+                    <div class="form__register-content">
+                        <div class="form__field">
+                            <input type="password"  class="form__field-input"  placeholder=" ">
+                            <label class="form__field-label" >Xác nhận mật khẩu</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+<!--            </div>-->
+            <div class="form__register-content">
+<!--                <div class="form__field">-->
+
+<!--                    <input type="text" class="form__field-input" placeholder=" "  th:field="*{phoneUser1}"  autofocus>-->
+<!--                    <label class="form__field-label">Số điện thoại</label>-->
+<!--                    <p class="form__field-error"  th:if="${#fields.hasErrors('phoneUser1')}" th:errors="*{phoneUser1}"></p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="form__field">-->
+<!--                <input type="text" class="form__field-input" placeholder=" " th:field="*{numberCard1}" />-->
+<!--                <label class="form__field-label" >Căn cước cá nhân</label>-->
+<!--                <p class="form__field-error" th:if="${#fields.hasErrors('numberCard1')}" th:errors="*{numberCard1}"></p>-->
+<!--            </div>-->
+            <div class="form__checkbox">
+                <div class="form__checkbox-content">
+                    <input type="checkbox" />
+                    <h5>Giữ cho tôi đăng nhập</h5>
+                </div>
+                <p>Bỏ chọn email về hàng mới, mặt hàng nóng, tiết kiệm hàng ngày, v.v.</p>
+            </div>
+
+            <div style="text-align: center" class="form__button">
+                <br>
+                <br>
+                <button  class="form__button-register"  type="submit">Tạo tài khoản</button>
+
+                <p>Nếu bạn chưa có tài khoản, vui lòng đăng ký</p>
+
+<!--                <button class="form__button-signin" ><a href="/login">Sign in</a></button>-->
+            </div>
+            </div>
+        </form>
+
+
+
+    </div>
+</div>
+
+</body>
+
+</html>

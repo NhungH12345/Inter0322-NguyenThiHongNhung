@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="/nha/css/index.css">
+	<title>Login Page</title>
+</head>
+<body>
+<div class="login">
+
+	<div class="login__content">
+		<div class="login__img">
+			<img src="/images/shop/Logo-Neffex.png"/>
+		</div>
+				<form th:action="@{/login}" th:object="${userDTO}" method="post">
+					<div class="login__form">
+						<form>
+							<div class="login__field">
+								<input class="login__field-input" type="text" name="username" autofocus placeholder=" " th:field="*{email}">
+								<label class="login__field-label" > Địa chỉ Email</label>
+							</div>
+							<div class="login__field">
+								<input class="login__field-input" type="password" name="password" placeholder=" " th:field="*{password}">>
+								<label class="login__field-label" >Mật khẩu</label>
+							</div>
+							<div class="login__forgot">
+								<a th:href="@{/forgot_password}">Quên mật khẩu ?</a>
+							</div>
+<!--							<div class="login__forgot">-->
+<!--								<a href="#">Forgot password ?</a>-->
+<!--							</div>-->
+							<div class="login__check">
+								<div class="login__check-remember">
+									<input type="checkbox" />
+									<h6>Giữ cho tôi đăng nhập</h6>
+								</div>
+								<p>Bỏ chọn nếu sử dụng thiết bị công cộng. <span>nhiều hơn</span></p>
+							</div>
+							<div class="login__btn">
+								<button class="button__signin" type="submit">Đăng nhập</button>
+								<p>Không có tài khoản ? </p>
+<!--								<a class="acount-btn" href="register.html">Creat an Account</a>-->
+								<a style="text-align: center; font-size: 20px" class="acount-btn" th:href="@{/register}"> Đăng ký tài khoản để mua hàng</a>
+							</div>
+						</form>
+					</div>
+				</form>
+	</div>
+<!--					<div>-->
+<!--						<span>Email Address: </span>-->
+<!--						<input type="text" th:field="*{email}">-->
+<!--					</div>-->
+<!--					<br>-->
+<!--					<div>-->
+<!--						<span>Password: </span>-->
+<!--						<input type="text" th:field="*{password}">-->
+<!--					</div>-->
+<!--					<br>-->
+<!--					<a class="forgot" href="#">Forgot Your Password?</a>-->
+<!--					<input type="submit" value="Login"/>-->
+<!--				</form>-->
+<!--			</div>-->
+<!--			<div class="clear"> </div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</div>-->
+<!--&lt;!&ndash;&#45;&#45; start-bottom-grids&#45;&#45;&ndash;&gt;-->
+<!--<div th:replace="/home :: bottom-grids">-->
+<!--</div>-->
+<!--&lt;!&ndash;&#45;&#45; //End-bottom-grids&#45;&#45;&ndash;&gt;-->
+<!--&lt;!&ndash;- //End-content&#45;&#45;&ndash;&gt;-->
+<!--&lt;!&ndash;-start-footer&#45;&#45;&ndash;&gt;-->
+</div>
+<!---//End-footer---->
+<!---//End-wrap---->
+</body>
+</html>
+

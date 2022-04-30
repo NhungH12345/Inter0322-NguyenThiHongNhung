@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cart | Book Store</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/price-range.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+	<link href="css/main.css" rel="stylesheet">
+	<link href="css/responsive.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+<div th:fragment="navbar">
+	<header id="header"><!--header-->
+		<div class="header_top"><!--header_top-->
+			<div class="container">
+				<div class="row" style="display:flex; justify-content: space-between;">
+					<div class="col-sm-6 ">
+						<div class="contactinfo">
+							<ul class="nav nav-pills">
+								<li><a href=""><i class="fa fa-phone"></i> +0 931 934 804</a></li>
+								<li><a href=""><i class="fa fa-envelope"></i> hongnhung22022000@gmail.com</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="social-icons pull-right">
+							<ul class="navv navbar-navv">
+								<li><a href=""><i class="fa fa-facebook"></i></a></li>
+								<li><a href=""><i class="fa fa-twitter"></i></a></li>
+								<li><a href=""><i class="fa fa-linkedin"></i></a></li>
+								<li><a href=""><i class="fa fa-dribbble"></i></a></li>
+								<li><a href=""><i class="fa fa-google-plus"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!--/header_top-->
+
+		<div class="header-middle"><!--header-middle-->
+			<div class="container">
+				<div class="" style="display: flex; justify-content: space-between">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href=""><img style="height: 100px" src="images/home/logo.png" alt="" /></a>
+						</div>
+						<div class="btn-group pull-right">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default toggle usa">
+									VNĐ
+									<!--									<span class="caret"></span>-->
+								</button>
+								<!--								<ul class="">-->
+								<!--									<li><a href="">Canada</a></li>-->
+								<!--									<li><a href="">UK</a></li>-->
+								<!--								</ul>-->
+							</div>
+
+							<div class="btn-group">
+								<button type="button" class="btn btn-default toggle usa">
+									DOLLAR
+
+								</button>
+								<!--								<ul class="">-->
+								<!--									<li><a href="">Canadian Dollar</a></li>-->
+								<!--									<li><a href="">Pound</a></li>-->
+								<!--								</ul>-->
+							</div>
+						</div>
+					</div>
+					<ul class="fix_css" style="display: flex; justify-content: space-between;margin-top: 40px;width: 310px;">
+						<li><a href=""><i class="fa fa-user"></i> Tài Khoản</a></li>
+						<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Giỏ Hàng</a></li>
+						<li class="h-100 mr-3">
+							<div class="dropdown">
+								<div sec:authorize="!isAuthenticated()">
+									<!--<i class="fas fa-ellipsis-h mr-1" style="font-size: 25px;"></i>-->
+									<button id="dropdownMenuButton1" data-bs-toggle="dropdown" type="button" data-toggle="dropdown"
+											style="background-color: #31b0d5;">Đăng nhập
+										<span class="caret" style="font-size: 16px; color: white; "></span>
+									</button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" >
+										<li class="text-center">
+											<div class="text-login">
+												<i class="fa fa-lock" style="color: #fe980f;"
+												   aria-hidden="true"></i>
+												<a th:href="@{/login}"  >
+													Đăng nhập
+												</a>
+											</div>
+										</li>
+										<li class="text-center">
+											<div class="text-login">
+												<i class="fa fa-sign-in mr-1" style="color: #fe980f;"
+												   aria-hidden="true"></i>
+												<a th:href="@{/register}" >
+													Đăng ký
+												</a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div><!--/header-middle-->
+
+		<div class="header-bottom"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu text-center">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+								<!--								<li><a href="index.html">Home</a></li>-->
+								<li><a th:href="@{/home}" class="active">Trang chủ</a><li>
+								<li><a th:href="@{/cart}">Giỏ Hàng</a></li>
+								<li><a th:href="@{/404}">404</a></li>
+								<li><a href="contact-us.html">Liên Lạc</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="div_timkiem">
+							<div class="search_lable">
+								<i class="fa-solid fa-magnifying-glass"></i>
+								<input class="search_input" type="text" placeholder="Tìm...">
+								<button type="submit" class="btn-primary">Search</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<section id="cart_items">
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Mặt hàng</td>
+							<td class="description"></td>
+							<td class="price">Giá</td>
+							<td class="quantity">Số lượng</td>
+							<td class="total">Tổng tiền</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="images/cart/one.png" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">Colorblock Scuba</a></h4>
+								<p>Web ID: 1089772</p>
+							</td>
+							<td class="cart_price">
+								<p>$59</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" href=""> + </a>
+									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" href=""> - </a>
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">$59</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="images/cart/two.png" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">Colorblock Scuba</a></h4>
+								<p>Web ID: 1089772</p>
+							</td>
+							<td class="cart_price">
+								<p>$59</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" href=""> + </a>
+									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" href=""> - </a>
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">$59</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="images/cart/three.png" alt=""></a>
+							</td>
+							<td class="cart_description">
+								<h4><a href="">Colorblock Scuba</a></h4>
+								<p>Web ID: 1089772</p>
+							</td>
+							<td class="cart_price">
+								<p>$59</p>
+							</td>
+							<td class="cart_quantity">
+								<div class="cart_quantity_button">
+									<a class="cart_quantity_up" href=""> + </a>
+									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+									<a class="cart_quantity_down" href=""> - </a>
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">$59</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	</section>
+		</div>
+
+
+	<section id="do_action">
+		<div class="container">
+			<div class="heading">
+				<h3>Bạn thích làm gì tiếp theo?</h3>
+				<p>Chọn xem bạn có mã giảm giá hoặc điểm thưởng muốn sử dụng hoặc muốn ước tính chi phí giao hàng của mình.</p>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="chose_area">
+						<ul class="user_option">
+							<li>
+								<input type="checkbox">
+								<label>Use Coupon Code</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Use Gift Voucher</label>
+							</li>
+							<li>
+								<input type="checkbox">
+								<label>Estimate Shipping & Taxes</label>
+							</li>
+						</ul>
+						<ul class="user_info">
+							<li class="single_field">
+								<label>Country:</label>
+								<select>
+									<option>United States</option>
+									<option>Bangladesh</option>
+									<option>UK</option>
+									<option>India</option>
+									<option>Pakistan</option>
+									<option>Ucrane</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+
+							</li>
+							<li class="single_field">
+								<label>Region / State:</label>
+								<select>
+									<option>Select</option>
+									<option>Dhaka</option>
+									<option>London</option>
+									<option>Dillih</option>
+									<option>Lahore</option>
+									<option>Alaska</option>
+									<option>Canada</option>
+									<option>Dubai</option>
+								</select>
+
+							</li>
+							<li class="single_field zip-field">
+								<label>Zip Code:</label>
+								<input type="text">
+							</li>
+						</ul>
+						<a class="btn btn-default update" href="">Get Quotes</a>
+						<a class="btn btn-default check_out" href="">Continue</a>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="total_area">
+						<ul>
+							<li>Cart Sub Total <span>$59</span></li>
+							<li>Eco Tax <span>$2</span></li>
+							<li>Shipping Cost <span>Free</span></li>
+							<li>Total <span>$61</span></li>
+						</ul>
+							<a class="btn btn-default update" href="">Update</a>
+							<a class="btn btn-default check_out" href="">Check Out</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<footer id="footer"><!--Footer-->
+	<div class="footer-top">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="companyinfo">
+						<h2><span>BOOK STORE</span></h2>
+						<p>Một cuốn sách hay trên giá sách là một người bạn dù quay lưng lại nhưng vẫn là bạn tốt.</p>
+					</div>
+				</div>
+				<div class="col-sm-7">
+					<div class="col-sm-3">
+						<div class="video-gallery text-center">
+							<a href="#">
+								<div class="iframe-img">
+									<img src="images/home/sach.jfif" alt="" />
+								</div>
+								<div class="overlay-icon">
+									<i class="fa fa-play-circle-o"></i>
+								</div>
+							</a>
+							<!--								<p>Circle of Hands</p>-->
+							<!--								<h2>24 DEC 2014</h2>-->
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="video-gallery text-center">
+							<a href="#">
+								<div class="iframe-img">
+									<img src="images/home/anhn.jfif" alt="" />
+								</div>
+								<div class="overlay-icon">
+									<i class="fa fa-play-circle-o"></i>
+								</div>
+							</a>
+							<!--								<p>Circle of Hands</p>-->
+							<!--								<h2>24 DEC 2014</h2>-->
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="video-gallery text-center">
+							<a href="#">
+								<div class="iframe-img">
+									<img src="images/home/anhnn.png" alt="" />
+								</div>
+								<div class="overlay-icon">
+									<i class="fa fa-play-circle-o"></i>
+								</div>
+							</a>
+							<!--								<p>Circle of Hands</p>-->
+							<!--								<h2>24 DEC 2014</h2>-->
+						</div>
+					</div>
+
+					<div class="col-sm-3">
+						<div class="video-gallery text-center">
+							<a href="#">
+								<div class="iframe-img">
+									<img src="images/home/anhm.jpg" alt="" />
+								</div>
+								<div class="overlay-icon">
+									<i class="fa fa-play-circle-o"></i>
+								</div>
+							</a>
+							<!--								<p>Circle of Hands</p>-->
+							<!--								<h2>24 DEC 2014</h2>-->
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="address">
+						<img src="images/home/map.png" alt="" />
+						<p>K100 Phan Văn Định, Đà Nẵng (Việt Nam)</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-widget">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-2">
+					<div class="single-widget">
+						<h2>Dịch Vụ</h2>
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="">Trợ Giúp Trực Tuyến</a></li>
+							<li><a href="">Liên Hệ Chúng Tôi</a></li>
+							<li><a href="">Tình Trạng Đặt Hàng</a></li>
+							<li><a href="">Thay Đổi Địa Điểm</a></li>
+							<li><a href="">Câu Hỏi Thường Gặp</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="single-widget">
+						<h2>Nhung Shop</h2>
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="">Sách Tiếng Anh</a></li>
+							<li><a href="">Sách Tiếng Việt</a></li>
+							<li><a href="">Sách Văn Học</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="single-widget">
+						<h2>Chính Sách</h2>
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="">Điều Khoản Sử Dụng</a></li>
+							<li><a href="">Chính Sách Bảo Mật</a></li>
+							<li><a href="">Chính Sách Hoàn Lại Tiền</a></li>
+							<li><a href="">Hệ Thống Thanh Toán</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="single-widget">
+						<h2>Về Cửa Hàng</h2>
+						<ul class="nav nav-pills nav-stacked">
+							<li><a href="">Thông Tin Công Ty</a></li>
+							<li><a href="">Nghề nghiệp</a></li>
+							<li><a href="">Vị Trí Cửa Hàng</a></li>
+							<li><a href="">Chương trình liên kết</a></li>
+							<li><a href="">Bản Quyền</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-3 col-sm-offset-1">
+					<div class="single-widget">
+						<h2>Về Cửa Hàng</h2>
+						<form action="#" class="searchform">
+							<input type="text" placeholder="Your email address" />
+							<button type="submit">Subscribe</button>
+							<p>Nhận các bản cập nhật gần đây nhất từ ​​trang web của chúng tôi và được cập nhật bản thân của bạn ...</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-bottom">
+		<div class="container">
+			<div class="row" style="text-align: center">
+				<p class="pull-left">Hồng Nhung 2020 © BOOK STORE</p>
+			</div>
+		</div>
+	</div>
+
+</footer><!--/Footer-->
+</div>
+
+<script src="js/jquery.js"></script>
+<script src="js/price-range.js"></script>
+<script src="js/jquery.scrollUp.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.prettyPhoto.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
+</body>
+</html>

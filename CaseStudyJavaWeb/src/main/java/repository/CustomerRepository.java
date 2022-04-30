@@ -14,7 +14,7 @@ public class CustomerRepository {
     final String INSERT_INTO_CUSTOMER = "INSERT INTO customer(`name`,birthday,gender,phone,email,id_type,address)" +
             " values(?,?,?,?,?,?,?);";
     final String SELECT_BY_ID = "SELECT * FROM customer WHERE id =?;";
-    final String DELETE_BY_CUSTOMER = "DELETE FROM customer WHERE id =";
+    final String DELETE_BY_ID= "DELETE FROM customer WHERE id =";
     final String EDIT_BY_ID = "call edit_customer_by_id(?,?,?,?,?,?,?);";
     final String SEARCH = "SELECT * FROM customer WHERE name like ?;";
 
@@ -104,7 +104,7 @@ public class CustomerRepository {
         connection = baseRepository.connectDataBase();
         boolean check = false;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_CUSTOMER);
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
             preparedStatement.setInt(1, id);
             check = preparedStatement.executeUpdate() > 0;
             preparedStatement.close();
