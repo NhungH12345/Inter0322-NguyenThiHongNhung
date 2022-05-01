@@ -30,8 +30,7 @@ public class ProductController {
     private CategoryService categoryService;
 
 
-
-//    @GetMapping()
+    //    @GetMapping()
 //    public ModelAndView getProductList(@ModelAttribute("products") Product product,@PageableDefault(size = 4) Pageable pageable, @RequestParam("search") Optional<String> search) {
 //        Page<Product> products;
 //        if (search.isPresent()) {
@@ -41,18 +40,18 @@ public class ProductController {
 //        }
 //        return new ModelAndView("Admin/product/list", "products", products);
 //    }
-@GetMapping()
-public ModelAndView getProductList(@PageableDefault(size = 4) Pageable pageable, @RequestParam("search") Optional<String> search) {
-    Page<Product> products;
-    if (search.isPresent()) {
-        products = productService.findProductByNameContaining(search.get(), pageable);
-    } else {
-        products = productService.findAll(pageable);
+    @GetMapping()
+    public ModelAndView getProductList(@PageableDefault(size = 4) Pageable pageable, @RequestParam("search") Optional<String> search) {
+        Page<Product> products;
+        if (search.isPresent()) {
+            products = productService.findProductByNameContaining(search.get(), pageable);
+        } else {
+            products = productService.findAll(pageable);
+        }
+        ModelAndView modelAndView = new ModelAndView("Admin/product/list");
+        modelAndView.addObject("products", products);
+        return modelAndView;
     }
-    ModelAndView modelAndView = new ModelAndView("Admin/product/list");
-    modelAndView.addObject("products", products);
-    return modelAndView;
-}
 
 //    @GetMapping("/home")
 //    public ModelAndView getProductIndex(@PageableDefault(size = 4) Pageable pageable) {
@@ -95,15 +94,25 @@ public ModelAndView getProductList(@PageableDefault(size = 4) Pageable pageable,
         }
     }
     @PostMapping("/edit-product")
-    public ModelAndView updateProduct( @ModelAttribute("products") Product product) {
-        productService.saveProduct(product);
+    public ModelAndView updateProduct(@ModelAttribute("products") Product product, @RequestParam("myfile") MultipartFile productAvatar) throws IOException {
+        try {
+            productService.editFile(product, productAvatar);
+            productService.saveProduct(product);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new ModelAndView("redirect:/admin/product");
     }
-    @GetMapping("/delete-product/{id}")
-    public ModelAndView showDeleteForm(@PathVariable int id){
-        productService.deleteProduct(id);
-        return new ModelAndView("redirect:/admin/product");
-    }
+//    @PostMapping("/edit-product")
+//    public ModelAndView updateProduct( @ModelAttribute("products") Product product) {
+//        productService.saveProduct(product);
+//        return new ModelAndView("redirect:/admin/product");
+//    }
+//    @GetMapping("/delete-product/{id}")
+//    public ModelAndView showDeleteForm(@PathVariable int id){
+//        productService.deleteProduct(id);
+//        return new ModelAndView("redirect:/admin/product");
+//    }
     @PostMapping("/delete-product")
     public ModelAndView DeleteProduct(@ModelAttribute ("products") Product product) {
 //        categoryService.deleteCategory(category.getId());

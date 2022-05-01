@@ -47,13 +47,19 @@
             <div class="col-xl-10 col-lg-8 col-md-8 ml-auto">
                 <div class="row align-items-center">
                     <div class="col-xl-12 col-12 mb-4 mb-xl-0">
-                        <h3 class=" text-center mb-3" style="color: red">Sửa loại sách </h3>
+                        <h3 class=" text-center mb-3" style="color: red">Sửa Nhà xuất bản </h3>
                         <form th:action="@{/admin/brand/edit-productBrand}" th:object="${productBrands}" method="post">
                             <input th:type="hidden" name="id" th:field="*{id}">
                             <div class="mb-2 row">
-                                <label class="col-sm-2 col-form-label">Tên Nhà xuất bản:</label>
+                                <label class="col-sm-2 col-form-label">Tên nhà xuất bản:</label>
                                 <div class="col-sm-8">
                                     <input class="form-control" type="text" th:field="*{name}"/>
+                                </div>
+                            </div>
+                            <div class="mb-2 row">
+                                <label class="col-sm-2 col-form-label">Tình trạng:</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" th:field="*{status}"/>
                                 </div>
                             </div>
                             <div style="text-align: center">

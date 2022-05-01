@@ -3,9 +3,11 @@ package com.shop.controller;
 import com.shop.DTO.UserDTO;
 import com.shop.config.JwtUtils;
 import com.shop.model.Product;
+import com.shop.model.ProductBrand;
 import com.shop.model.Role;
 import com.shop.model.User;
 import com.shop.repository.UserRepository;
+import com.shop.service.ProductBrandService;
 import com.shop.service.ProductService;
 import com.shop.service.RoleService;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -35,11 +37,14 @@ import org.thymeleaf.context.Context;
 //import javax.mail.internet.MimeMessage;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
+    @Autowired
+    private ProductBrandService productBrandService;
     @Autowired
     private ProductService productService;
 
@@ -61,17 +66,29 @@ public class HomeController {
     @Autowired
     public JavaMailSender emailSender;
     @GetMapping("")
-    public ModelAndView listCustomer(@RequestParam(name = "nameC", required = false, defaultValue = "") String nameProduct, @PageableDefault(size = 2) Pageable pageable){
+//    public ModelAndView listProduct(@RequestParam(name = "nameP", required = false, defaultValue = "") String nameProduct, @PageableDefault(size = 2) Pageable pageable){
+//        ModelAndView modelAndView = new ModelAndView("home");
+////        Page<Employee> page = employeeService.findAll(pageable);
+//        Page<Product> page = productService.searchByName(nameProduct, pageable);
+//        long totalItems = page.getTotalElements();
+//        modelAndView.addObject("currentPage",pageable.getPageNumber() + 1);
+//        modelAndView.addObject("totalItems",totalItems);
+//        modelAndView.addObject("nameP",nameProduct);
+//        modelAndView.addObject("products",page);
+//        return modelAndView;
+    public ModelAndView getProductList(@PageableDefault(size = 1) Pageable pageable, @RequestParam("search") Optional<String> search) {
+        Page<Product> products;
+        if (search.isPresent()) {
+            products = productService.findProductByNameContaining(search.get(), pageable);
+        } else {
+            products = productService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("home");
-//        Page<Employee> page = employeeService.findAll(pageable);
-        Page<Product> page = productService.searchByName(nameProduct, pageable);
-        long totalItems = page.getTotalElements();
-        modelAndView.addObject("currentPage",pageable.getPageNumber() + 1);
-        modelAndView.addObject("totalItems",totalItems);
-        modelAndView.addObject("nameP",nameProduct);
-        modelAndView.addObject("products",page);
+        modelAndView.addObject("products", products);
         return modelAndView;
+
     }
+
     @GetMapping("home")
     public ModelAndView getHome(@ModelAttribute("products") Product product){
         return new ModelAndView("home", "products",productService.findAll());
@@ -131,8 +148,6 @@ public class HomeController {
                 model.addAttribute("error", "sai thong tin or tk chua acctive");
                 return new ModelAndView("redirect:/");
             }
-
-
         }
         return new ModelAndView("redirect:/home");
     }
@@ -199,13 +214,6 @@ public class HomeController {
     }
     @GetMapping("details/{id}")
     public ModelAndView getDetailsPage(@PathVariable Integer id, Model model) {
-        /*List<Category> categories = categoryService.findAll();
-        model.addAttribute("categories", categories);*/
-        /*
-        tim kiem tât cả các size có product_id  = id
-         */
-//        List<ProductSize> productSizes = productSizeService.findByProductId(id);
-//        model.addAttribute("productSizes", productSizes);
         Optional<Product> product = productService.findProductById(id);
         if (product != null) {
             return new ModelAndView("product-details", "products", product.get());

@@ -2,6 +2,7 @@ package com.shop.service.Impl;
 import com.shop.model.Product;
 import com.shop.repository.ProductRepository;
 import com.shop.service.ProductService;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +18,9 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
+    private MultipartFile productAvatar;
+    public static final String path_To_File = "F:\\Inter0322-NguyenThiHongNhung\\do_an_thi\\Shop_Book\\src\\main\\resources\\static\\images\\avatar\\";
+
     @Override
     public Page<Product> findAll(Pageable pageable) {
         return productRepository.findAll(pageable);
@@ -42,25 +46,45 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findProductByNameContaining(name, pageable);
     }
     @Override
+//    public void addFile(Product productsEnity, MultipartFile productAvatar
+//    ) throws IllegalStateException, IOException {
+//
+//        String pathToFile ="F:\\Inter0322-NguyenThiHongNhung\\do_an_thi\\Shop_Book\\src\\main\\resources\\static\\images\\avatar\\"
+//                + productAvatar.getOriginalFilename();
+//        // tạo file
+//        File file = new File(pathToFile);
+//        //chuyển data vào cái file vừa tạo
+//        productAvatar.transferTo(new File(pathToFile));
+//        //luu tên ảnh vào db
+//        productsEnity.setAvatar(productAvatar.getOriginalFilename());
+//        saveProduct(productsEnity);
+//
+//    }
     public void addFile(Product productsEnity, MultipartFile productAvatar
     ) throws IllegalStateException, IOException {
-
-        String pathToFile ="F:\\Inter0322-NguyenThiHongNhung\\do_an_thi\\Shop_Book\\src\\main\\resources\\static\\images\\avatar\\"
-                + productAvatar.getOriginalFilename();
+        String randomChar = RandomStringUtils.randomAlphabetic(10);
         // tạo file
-        File file = new File(pathToFile);
+        File file = new File(path_To_File + randomChar + productAvatar.getOriginalFilename());
         //chuyển data vào cái file vừa tạo
-        productAvatar.transferTo(new File(pathToFile));
+        productAvatar.transferTo(new File(path_To_File + randomChar + productAvatar.getOriginalFilename()));
         //luu tên ảnh vào db
-        productsEnity.setAvatar(productAvatar.getOriginalFilename());
+        productsEnity.setAvatar(randomChar + productAvatar.getOriginalFilename());
         saveProduct(productsEnity);
 
     }
 
     @Override
-    public void editFile(Product productsEnity, MultipartFile productAvatar) throws IOException {
+        public void editFile(Product productsEnity, MultipartFile productAvatar) throws IllegalStateException, IOException {
+            Optional<Product> product = productRepository.findById(productsEnity.getId());
+            if (!productAvatar.isEmpty()) {
+                new File(path_To_File + product.get().getAvatar()).delete();
+                addFile(productsEnity, productAvatar);
+            } else {
 
-    }
+            }
+
+        }
+
 
     @Override
     public List<Product> findAll() {

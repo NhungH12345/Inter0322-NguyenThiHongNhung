@@ -1,6 +1,7 @@
 package com.shop.controller;
 
 import com.shop.model.Category;
+import com.shop.model.Product;
 import com.shop.model.ProductBrand;
 import com.shop.service.ProductBrandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,12 @@ public class BrandController {
         System.out.println(id);
         productBrandService.deleteById(id);
         return new ModelAndView("redirect:/admin/brand");
+    }
+    @PostMapping("/delete-product")
+    public ModelAndView DeleteProductBrand(@ModelAttribute ("productBrads") ProductBrand productBrand) {
+//        categoryService.deleteCategory(category.getId());
+        productBrandService.deleteProductBrand(productBrand.getId());
+        return  new ModelAndView("redirect:/admin/brand");
     }
 }
 

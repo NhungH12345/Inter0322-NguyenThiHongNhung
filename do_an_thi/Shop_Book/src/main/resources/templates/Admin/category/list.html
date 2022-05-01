@@ -48,10 +48,12 @@
                 <div class="row align-items-center">
                     <div class="col-xl-12 col-12 mb-4 mb-xl-0">
                         <h3 class=" text-center mb-3" style="color: red">Quản lý loại sách </h3>
-                        <div style="text-align: right">
-                            <input name="search" type="text" value="Nhập tên loại sách..."/>
-                            <input type="submit" value="Search"/>
-                        </div>
+                        <form>
+                            <div style="text-align: right">
+                                <input name="search" type="text" value="Nhập tên loại sách..."/>
+                                <input type="submit" value="Search"/>
+                            </div>
+                        </form>
                         <a class="btn btn-warning" role="button" href="/admin/category/create">Thêm mới</a>
                         <br>
                         <br>
@@ -69,7 +71,7 @@
                                 <tr th:each="category:${categories}">
                                     <td th:text="${category.id}"></td>
                                     <td th:text="${category.name}"></td>
-                                    <td th:text="${category.product.status}"></td>
+                                    <td th:text="${category.status}"></td>
                                     <td><a class="btn btn-warning" role="button" th:href="@{/admin/category/edit-category/__${category.id}__ } ">Sửa</a></td>
                                     <!--                                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCategory">Delete</button></td>-->
                                     <td>
