@@ -1,0 +1,32 @@
+<div class="table-responsive" style="text-align: center">
+    <div class="font-weight-bold h2 my-3">
+        ĐƠN HÀNG CHI TIẾT
+    </div>
+    <table id="example1" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên sản phẩm</th>
+            <th>Hình Ảnh</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Tổng tiền</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderDetail,status: ${orderDetails}">
+            <td th:text="${status.index + 1}"></td>
+            <td th:text="${orderDetail.product.name}"></td>
+            <td>
+                <img th:src="@{${'/images/avatar/'+orderDetail.product.avatar}}"/>
+            </td>
+            <td th:text="${orderDetail.quantity}"/>
+            <td th:text="${#numbers.formatDecimal(orderDetail.price, 0, 'COMMA', 0, 'POINT')}"/>
+            <td th:text="${#numbers.formatDecimal(orderDetail.quantity * orderDetail.price, 0, 'COMMA', 0, 'POINT')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+        <span class="font-weight-bold">Tổng tiền: [[${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')}]] VNĐ</span>
+    </div>
+</div>

@@ -23,7 +23,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void saveCategory(Category category) {
-    categoryRepository.save(category);
+        List<Category> categories = this.categoryRepository.findAll();
+        if (!categories.isEmpty()) {
+            Category categor = categories.get(categories.size() - 1);
+            category.setId(categor.getId() + 1);
+        }
+        categoryRepository.save(category);
     }
 
     @Override
@@ -44,6 +49,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<Category> findCategoryByNameContaining(String name, Pageable pageable) {
-        return categoryRepository.findCategoryByNameContaining(name, pageable);
+        return categoryRepository.findCategoryByNameContainingOrderById(name, pageable);
     }
 }

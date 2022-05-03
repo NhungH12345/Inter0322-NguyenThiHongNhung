@@ -13,4 +13,9 @@ public class UserServiceImpl implements UserService {
     public User save(User user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public User findByEmail(String username) {
+        return this.userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("not found username"));
+    }
 }

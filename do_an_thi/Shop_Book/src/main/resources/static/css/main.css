@@ -2522,4 +2522,7 @@ h2.title {
   color: #31b0d5;
 }
 
-
+.active {
+  background: #31b0d5 !important;
+  color: #fff !important;
+}

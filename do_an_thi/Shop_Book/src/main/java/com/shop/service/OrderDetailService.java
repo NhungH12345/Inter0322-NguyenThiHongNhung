@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface OrderDetailService {
     List<OrderDetail> findAll();
     Optional<OrderDetail> findByOrderId(int id);
-    OrderDetail findOrderDetailByOrderId(int id);
+    List<OrderDetail> findOrderDetailByOrderId(int id);
+    OrderDetail save(OrderDetail orderDetail);
 }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="~{layout/header::header}">
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<style>
+
+</style>
+<body>
+<div th:replace="~{layout/navbar::navbar(~{::#form})}">
+    <form id="form" class="m-0" method="POST" th:action="@{/payment}">
+        <div>
+            <div style="color: #5BBCEC" class="h2 text-center mb-5">
+                Hoan nghênh quý khách đặt hàng tại BOOK STORE
+            </div>
+            <div class="form-group">
+                <label>Họ tên người mua</label>
+                <input placeholder="Họ tên người mua" name="customerName" class="form-control" th:value="${currentUser != null ? currentUser.username : '' }" th:readonly="${currentUser != null ? 'readonly' : ''}">
+            </div>
+            <div class="form-group">
+                <label>Địa chỉ Email</label>
+                <input type="email" name="customerEmail" placeholder="Nhập địa chỉ email" class="form-control" th:value="${currentUser != null ? currentUser.email : ''}" th:readonly="${currentUser != null ? 'readonly' : ''}">
+            </div>
+
+            <div class="form-group">
+                <label>SĐT</label>
+                <input placeholder="Nhập sđt người nhận" name="phone" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Địa chỉ nhận hàng</label>
+                <input placeholder="Nhập địa chỉ nhận hàng" name="customerAddress" class="form-control">
+            </div>
+        </div>
+        <div>
+            <div class="h2 text-center mb-2 mt-2">
+                Phương thức thanh toán
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="method-pay" id="default-method" value="0" checked/>
+                <label class="form-check-label" for="default-method">Thanh toán khi nhận hàng</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="method-pay" id="cart-method" value="1"/>
+                <label class="form-check-label" for="cart-method">thanh toán bằng thẻ</label>
+            </div>
+        </div>
+        <button class="btn btn-primary w-100 rounded">Xác nhận thành toán</button>
+    </form>
+</div>
+
+
+
+<footer th:replace="~{layout/footer :: footer}"></footer>
+</body>
+</html>

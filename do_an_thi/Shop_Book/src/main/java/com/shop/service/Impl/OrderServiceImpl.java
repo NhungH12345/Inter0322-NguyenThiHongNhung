@@ -21,9 +21,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void saveOrder(Order order) {
-        orderRepository.save(order);
-
+    public Order saveOrder(Order order) {
+        return orderRepository.save(order);
     }
     @Override
     public void deleteOrder(int id) {
@@ -38,5 +37,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Page<Order> findOrderByCustomerNameContaining(String customerName, Pageable pageable) {
         return orderRepository.findOrderByCustomerNameContaining(customerName, pageable);
+    }
+
+    @Override
+    public Page<Order> findByEmail(String email, Pageable pageable) {
+        return this.orderRepository.findByCustomerEmailLike("%" + email + "%", pageable);
     }
 }

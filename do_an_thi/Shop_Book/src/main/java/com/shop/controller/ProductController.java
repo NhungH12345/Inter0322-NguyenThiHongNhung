@@ -108,11 +108,11 @@ public class ProductController {
 //        productService.saveProduct(product);
 //        return new ModelAndView("redirect:/admin/product");
 //    }
-//    @GetMapping("/delete-product/{id}")
-//    public ModelAndView showDeleteForm(@PathVariable int id){
-//        productService.deleteProduct(id);
-//        return new ModelAndView("redirect:/admin/product");
-//    }
+    @GetMapping("/delete-product/{id}")
+    public ModelAndView showDeleteForm(@PathVariable int id){
+        productService.deleteProduct(id);
+        return new ModelAndView("redirect:/admin/product");
+    }
     @PostMapping("/delete-product")
     public ModelAndView DeleteProduct(@ModelAttribute ("products") Product product) {
 //        categoryService.deleteCategory(category.getId());

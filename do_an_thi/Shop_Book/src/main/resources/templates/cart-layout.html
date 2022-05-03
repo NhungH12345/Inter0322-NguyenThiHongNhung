@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/header::header}">
+	<meta charset="UTF-8">
+	<title>Index</title>
+</head>
+<style>
+	#title {
+		color: #31b0d5
+	}
+
+	td, th {
+		border: 1px solid;
+	}
+</style>
+<body>
+<div th:replace="~{layout/navbar::navbar(~{cart::#cart})}">
+</div>
+
+
+<footer th:replace="~{layout/footer :: footer}"></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script th:src="@{/js/cart.js}"></script>
+</body>
+</html>

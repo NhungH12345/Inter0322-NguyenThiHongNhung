@@ -13,6 +13,8 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query("SELECT p FROM Product p ORDER BY p.price DESC")
     Page<Product> findAll(Pageable pageable);
+
+    @Query(nativeQuery = true, value = "SELECT * FROM product WHERE name LIKE ?1")
     Page<Product> findProductByNameContaining(String name,Pageable pageable);
     List<Product> findAll();
     @Query(value = "SELECT * FROM product where product.category_id_category = :id",nativeQuery = true)

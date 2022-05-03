@@ -7,12 +7,15 @@ import java.util.Set;
 @Table(name="category")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
     private int id;
+
     @Column(name = "name")
     private String name;
+
+    @Column(name = "status")
     private String status;
+
     @OneToMany(mappedBy = "id")
     private Set<Product> products;
     public Category() {
@@ -38,14 +41,13 @@ public class Category {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setDescription(String description) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
+    public String getStatus() {
+        return status;
+    }
 
     public Set<Product> getProducts() {
         return products;

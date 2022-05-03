@@ -13,6 +13,7 @@ import com.shop.service.RoleService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -65,48 +66,23 @@ public class HomeController {
 
     @Autowired
     public JavaMailSender emailSender;
-    @GetMapping("")
-//    public ModelAndView listProduct(@RequestParam(name = "nameP", required = false, defaultValue = "") String nameProduct, @PageableDefault(size = 2) Pageable pageable){
-//        ModelAndView modelAndView = new ModelAndView("home");
-////        Page<Employee> page = employeeService.findAll(pageable);
-//        Page<Product> page = productService.searchByName(nameProduct, pageable);
-//        long totalItems = page.getTotalElements();
-//        modelAndView.addObject("currentPage",pageable.getPageNumber() + 1);
-//        modelAndView.addObject("totalItems",totalItems);
-//        modelAndView.addObject("nameP",nameProduct);
-//        modelAndView.addObject("products",page);
-//        return modelAndView;
-    public ModelAndView getProductList(@PageableDefault(size = 1) Pageable pageable, @RequestParam("search") Optional<String> search) {
-        Page<Product> products;
-        if (search.isPresent()) {
-            products = productService.findProductByNameContaining(search.get(), pageable);
-        } else {
-            products = productService.findAll(pageable);
-        }
+
+    @GetMapping(value = {"", "home"})
+    public ModelAndView getProductList(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "") String keyword) {
+        Page<Product> products = productService.findProductByNameContaining(keyword, PageRequest.of(page - 1, 9));
+        System.out.println(products.getTotalPages());
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("products", products);
+        modelAndView.addObject("currentPage", page);
+        modelAndView.addObject("previousPage", page - 1);
+        modelAndView.addObject("nextPage", page + 1);
         return modelAndView;
 
     }
 
-    @GetMapping("home")
-    public ModelAndView getHome(@ModelAttribute("products") Product product){
-        return new ModelAndView("home", "products",productService.findAll());
-    }
-
-//    @GetMapping("home")
-//    public String GetHomePage() {
-//        return "home";
-//    }
-
     @GetMapping("/404")
     public String GetLoiPage() {
         return "404";
-    }
-
-    @GetMapping("/cart")
-    public String GetCartPage() {
-        return "cart";
     }
 
     @GetMapping("/product-details")
@@ -138,9 +114,7 @@ public class HomeController {
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDTO.getEmail(), userDTO.getPassword());
                 Authentication authentication = authenticationManager.authenticate(authenticationToken);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                System.out.println(userLogined.getAuthorities());
                 String jwt = jwtUtils.generateJwtToken(userLogined).trim();
-                System.out.println(jwt);
             } catch (UsernameNotFoundException usernameNotFoundException) {
                 model.addAttribute("error", "sai thong tin or tk chua acctive");
                 return new ModelAndView("login");
@@ -194,10 +168,6 @@ public class HomeController {
 
         return new ModelAndView("login");
     }
-//    @GetMapping("/cart")
-//    public ModelAndView getCartPage() {
-//        return new ModelAndView("cart");
-//    }
 
     @GetMapping("activty-accout/{key}")
     public ModelAndView activityAccount(@PathVariable(value = "key") String key){

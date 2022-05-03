@@ -50,7 +50,7 @@
                         <h3 class=" text-center mb-3" style="color: red">Quản lý Nhà xuất bản </h3>
                         <form>
                             <div style="text-align: right">
-                                <input name="search" type="text" value="Nhập tên nhà xuất bản..."/>
+                                <input name="search" type="text" placeholder="Nhập tên nhà xuất bản..."/>
                                 <input type="submit" value="Search"/>
                             </div>
                         </form>
@@ -75,7 +75,7 @@
                                     <td><a class="btn btn-warning" role="button" th:href="@{/admin/brand/edit-productBrand/__${productBrand.id}__ } ">Sửa</a></td>
                                     <!--                                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCategory">Delete</button></td>-->
                                     <td>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete">Xóa</button>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete">Xóa</button>
                                     </td>
                                     <td class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">

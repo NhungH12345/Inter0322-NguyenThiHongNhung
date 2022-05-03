@@ -3,9 +3,47 @@
 <head th:replace="~{layout/header::header}">
     <meta charset="UTF-8">
     <title>Index</title>
+
 </head>
 <body>
-<div th:replace="~{layout/navbar::navbar}"></div>
+<div th:replace="~{layout/navbar::navbar(~{::#container})}">
+    <div id="container">
+        <div class="features_items"><!--features_items-->
+            <h1 style="color: deepskyblue" class="title text-center">Tất cả sản phẩm</h1>
+            <div th:each="product:${products}" class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="">
+                        <div class="productinfo text-center">
+                            <!--                                            <img style="height: 260px" src="images/shop/product3.jpg" alt="" />-->
+                            <img th:src="@{${'/images/avatar/'+product.avatar}}" alt=""
+                                 style="height: 283px"/>
+                            <h4 style="font-weight: 700;" th:text="${product.name}"></h4>
+                            <h3 style="color: #5BBCEC" th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT') + ' VNĐ'}"></h3>
+                            <a class="btn btn-warning" type="submit" role="button" th:href="@{/details/__${product.id}__ } ">Chi tiết sản phẩm</a></td>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                </div><!--features_items-->
+            </div>
+        </div>
+        <nav class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item" th:if="${products.hasPrevious()}">
+                    <a class="page-link" th:href="@{/home(page=${preivousPage}, keywrod=${param.keyword} )}">Previous</a>
+                </li>
+                <li th:each="i: ${#numbers.sequence(1, products.totalPages)}" class="page-item">
+                    <a class="page-link" th:classappend="${i ==  currentPage ? 'active' : ''}" th:href="@{/home(page=${i}, keywrod=${param.keyword} )}">[[${i}]]</a>
+                </li>
+                <li class="page-item" th:if="${products.hasNext()}">
+                    <a class="page-link" th:href="@{/home(page=${nextPage}, keywrod=${param.keyword} )}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
 
 
 

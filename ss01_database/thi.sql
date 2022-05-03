@@ -1,0 +1,1 @@
+SELECT * FROM do_an_bao_cao.product;

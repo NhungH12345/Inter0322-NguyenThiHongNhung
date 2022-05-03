@@ -48,7 +48,7 @@
                 <div class="row align-items-center">
                     <div class="col-xl-12 col-12 mb-4 mb-xl-0">
                         <h3 class=" text-center mb-3" style="color: red"> Thêm mới loại sách </h3>
-                        <form th:action="@{/admin/category/create}" th:object="${categories}" method="post">
+                        <form th:action="@{/admin/category/create}" th:object="${category}" method="post">
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Tên loại sách: </label>
                                 <div class="col-sm-8">

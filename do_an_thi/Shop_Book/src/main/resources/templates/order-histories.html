@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/header::header}">
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<div th:replace="~{layout/navbar::navbar(~{::#container})}">
+    <div id="container">
+        <div class="table-responsive" style="text-align: center">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr style="text-align: center">
+                    <th>STT</th>
+                    <th>Ngày mua</th>
+                    <th>Loại thanh toán</th>
+                    <th>Địa chỉ nhận</th>
+                    <th>SĐT nhận</th>
+                    <th>Tổng tiền</th>
+                    <th>Tình trạng</th>
+                </thead>
+                <tbody>
+                <tr th:each="order,status: ${orders.getContent()}">
+                    <td th:text="${status.index + 1}"></td>
+                    <td th:text="${#dates.format(order.createdAt, 'dd-MM-yyyy')}"/>
+                    <td th:text="${order.methodPayment == 0 ? 'Thanh toan khi nhan hang' : 'thanh toan bang the'}"></td>
+                    <td th:text="${order.customerAddress}"></td>
+                    <td th:text="${order.phone}"></td>
+                    <td th:text="${order.totalPrice}"></td>
+                    <td th:text="${order.status}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- pagination -->
+        <div style="text-align: center; font-size: 30px">
+            <a th:href="@{'/admin/order'(page=${orders.number - 1})}" th:if="${orders.hasPrevious()}">Trước</a>
+            <!--    <span th:text="${customers.number + 1}"></span>/<span th:text="${customers.totalPages}"></span>-->
+            <th:block th:each="i: ${#numbers.sequence(0, 1)}"  th:if="${orders.number < orders.totalPages - 1}">
+                <a th:class="${i == param.get('page') ? 'active' : ''}" th:href="@{'/admin/order'(page=${orders.number + i})}" th:text="${orders.number + i +1}"></a>
+            </th:block>
+            <a th:href="@{'/admin/order'(page=${orders.number + 1})}" th:if="${orders.hasNext()}">Sau</a>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{layout/footer :: footer}"></footer>
+</body>
+</html>

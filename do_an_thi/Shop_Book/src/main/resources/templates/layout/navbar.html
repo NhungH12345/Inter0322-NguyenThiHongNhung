@@ -9,7 +9,7 @@
 
 </head>
 <body>
-<div th:fragment="navbar">
+<div th:fragment="navbar(body)">
     <header id="header"><!--header-->
         <div class="header_top"><!--header_top-->
             <div class="container">
@@ -42,7 +42,7 @@
                 <div class="" style="display: flex; justify-content: space-between">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href=""><img style="height: 100px" src="images/home/logo.png" alt=""/></a>
+                            <a href=""><img style="height: 100px" th:src="@{/images/home/logo.png}" alt=""/></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -125,12 +125,12 @@
                         </div>
                         <div class="mainmenu text-center">
                             <ul class="nav navbar-nav collapse navbar-collapse">
-                                <!--								<li><a href="index.html">Home</a></li>-->
-                                <li><a href="@{/home}" class="active">Trang chủ</a>
-                                <li>
+                                <li><a th:href="@{/home}" class="active">Trang chủ</a><li>
                                 <li><a th:href="@{/cart}">Giỏ Hàng</a></li>
-<!--                                <li><a th:href="@{/404}">404</a></li>-->
                                 <li><a th:href="@{/contact-us}">Liên Lạc</a></li>
+                                <li sec:authorize="isAuthenticated()">
+                                    <a th:href="@{/order/histories}">Lịch sử đặt hàng</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -140,10 +140,10 @@
                                 <i class="fa-solid fa-magnifying-glass"></i>
 <!--                                <input th:value="${nameP}" name="namP" class="search_input" type="text" placeholder="Tìm...">-->
 <!--                                <button type="submit" class="btn-primary">Search</button>-->
-                                <div style="text-align: right">
-                                    <input name="search" type="text" value="Tim..."/>
+                                <form th:action="@{home}" method="get" style="text-align: right">
+                                    <input name="keyword" type="text" placeholder="Tìm kiếm" th:value="${param.keyword}"/>
                                     <input type="submit" class="btn-primary" value="Search"/>
-                            </div>
+                                </form>
                             </div>
 <!--                            <form action="">-->
 <!--                                <div class="search-box">-->
@@ -173,13 +173,13 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img style="width: 1140px" height="350px" src="images/shop/banner.jpg" alt="...">
+                        <img style="width: 1140px" height="350px" th:src="@{/images/shop/banner.jpg}" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img style="width: 1140px" height="350px" src="images/shop/p1.png" alt="...">
+                        <img style="width: 1140px" height="350px" th:src="@{/images/shop/p1.png}" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img style="width: 1140px" height="350px" src="images/shop/p3.JPG" class="d-block w-100"
+                        <img style="width: 1140px" height="350px" th:src="@{/images/shop/p3.JPG}" class="d-block w-100"
                              alt="...">
                     </div>
                 </div>
@@ -254,43 +254,9 @@
                     </div>
                 </div>
                 <div class="col-sm-9 padding-right">
-                    <div class="features_items"><!--features_items-->
-                        <h1 style="color: deepskyblue" class="title text-center">Tất cả sản phẩm</h1>
-                        <div th:each="product:${products}" class="col-sm-4">
-                            <div class="product-image-wrapper">
-                                <div class="">
-                                    <div class="productinfo text-center">
-                                        <!--                                            <img style="height: 260px" src="images/shop/product3.jpg" alt="" />-->
-                                        <img th:src="@{${'/images/avatar/'+product.avatar}}" alt=""
-                                             style="height: 283px"/>
-                                        <h4 style="font-weight: 700;" th:text="${product.name}"></h4>
-                                        <h3 style="color: #5BBCEC" th:text="${product.price + ' VNĐ'}"></h3>
-<!--                                        <a th:href="@{/details}" class="btn btn-default add-to-cart"></i>Chi-->
-<!--                                            tiết sản phẩm</a>-->
-                                        <a class="btn btn-warning" type="submit" role="button" th:href="@{/details/__${product.id}__ } ">Chi tiết sản phẩm</a></td>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div>
-                            </div><!--features_items-->
-                        </div>
-                    </div>
-
+                    <div th:replace="${body}">
                 </div>
-                <ul class="pagination">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                        </ul>
-                        <!--						</nav>-->
-                    </nav>
-                </ul>
+
 <!--                <ul class="pagination">-->
 <!--                    <nav aria-label="Page navigation example">-->
 <!--                    <li class="page-item disabled"><a class="page-link" th:href="@{'/home'(page=${products.number - 1}, nameP=${nameP})}"-->

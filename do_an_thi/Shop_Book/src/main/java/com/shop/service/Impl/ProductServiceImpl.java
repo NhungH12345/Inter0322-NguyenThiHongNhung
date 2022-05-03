@@ -43,7 +43,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Page<Product> findProductByNameContaining(String name, Pageable pageable) {
-        return productRepository.findProductByNameContaining(name, pageable);
+        return productRepository.findProductByNameContaining("%"+name+"%", pageable);
     }
     @Override
 //    public void addFile(Product productsEnity, MultipartFile productAvatar

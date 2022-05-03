@@ -9,8 +9,8 @@ import java.util.List;
 
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, Integer> {
-    @Query( value = "select order_detail.*\r\n" +
-            "from `order`, order_detail where  `order`.id_order=order_detail.order_id_order and order_detail.order_id_order=: id_order",nativeQuery = true)
+
+    @Query(nativeQuery = true, value = "SELECT * FROM order_detail WHERE order_id_order = ?1")
     List<OrderDetail> findOrderDetailByOrderId(int id);
 
 }
