@@ -75,9 +75,9 @@
                                     <td><a class="btn btn-warning" role="button" th:href="@{/admin/category/edit-category/__${category.id}__ } ">Sửa</a></td>
                                     <!--                                    <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteCategory">Delete</button></td>-->
                                     <td>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete">Xóa</button>
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" th:attr="data-target=${'#delete'+category.id}" >Xóa</button>
                                     </td>
-                                    <td class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                    <td class="modal fade" th:id="${'delete'+category.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                         aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <form th:action="@{/admin/category/delete-category/__${category.id}__}" class="modal-content">

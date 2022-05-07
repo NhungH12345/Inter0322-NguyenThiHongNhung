@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -24,7 +25,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void saveCategory(Category category) {
         List<Category> categories = this.categoryRepository.findAll();
-        if (!categories.isEmpty()) {
+        if (!categories.isEmpty() && category.getId() == 0) {
             Category categor = categories.get(categories.size() - 1);
             category.setId(categor.getId() + 1);
         }

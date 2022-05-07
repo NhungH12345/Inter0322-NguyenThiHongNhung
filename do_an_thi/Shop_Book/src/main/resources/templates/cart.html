@@ -24,15 +24,16 @@
                         <img style="width: 150px" th:src="@{${'/images/avatar/'+item.product.avatar}}"/>
                     </div>
                 </td>
-                <td th:text="${item.price} "/>
+                <td th:text="${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}"/>
                 <td>
                     <button style="color: orange" id="btn-increase" th:attr="data-id=${item.product.id}">&#43;</button>
                     <p>[[${item.quantity}]]</p>
                     <button style="color: red" id="btn-decrease" th:attr="data-id=${item.product.id}">&#8722;</button>
                 </td>
-                <td>
-                    [[${item.price * item.quantity}]]
-                </td>
+
+                <td th:text="${#numbers.formatDecimal(item.quantity * item.price, 0, 'COMMA', 0, 'POINT')}"></td>
+<!--                    [[${item.price * item.quantity}]]-->
+
                 <td>
                     <button style="color: red; text-align: center" id="btn-delete" th:attr="data-id=${item.product.id}">X</button>
                 </td>
@@ -47,7 +48,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="d-flex justify-content-between align-items-center" style="height: 50px; border: 1px solid;">
+        <div class="d-flex justify-content-between" style="height: 50px; border: 1px solid; align-items: center">
             <a th:href="@{/home}">Tiếp tục mua hàng</a>
             <a>Đăng ký mới</a>
             <a>Bạn đã có tài khoản</a>

@@ -15,6 +15,7 @@
     <link th:href="@{/css/animate.css}" rel="stylesheet">
     <link th:href="@{/css/main.css}" rel="stylesheet">
     <link th:href="@{/css/responsive.css}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" rel="stylesheet"/>
     <!--[if lt IE 9]>
     <script th:src="@{js/html5shiv.js}"></script>
     <script th:src="@{js/respond.min.js}"></script>
@@ -260,7 +261,8 @@
                         <div class="col-sm-7">
                             <div th:object="${products}" class="product-information">
                                 <div>
-                                <img th:src="@{/images/product-details/new.jpg}" class="newarrival" alt="" />
+                                <img th:if="*{quantity > 0}" th:src="@{/images/product-details/new.jpg}" class="newarrival" alt="" />
+                                <img th:if="*{quantity < 1}" style="width: 80px; border-radius: 20px" src="data:image/jpeg;base64,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"/>
                                 </div>
 
                                 <!--/product-information-->
@@ -285,12 +287,12 @@
 									<label>Số lượng:</label>
 
 <!--                                     <input class="minus is-form" type="button" value="-">-->
-                                        <input aria-label="quantity" id="product-quantity" class="input-qty" max="100" min="1" name="" type="number" value="">
+                                        <input aria-label="quantity" id="product-quantity" class="input-qty" th:max="${products.quantity}" min="1" name="" type="number" value="1">
 <!--                                          <input class="plus is-form" type="button" value="+">-->
 <!--									<input type="text" value="3" />-->
                                     <br>
 
-									<button type="button" class="btn btn-fefault cart" th:attr="onclick=|addToCart('${products.id}')|" style="text-align: center">
+									<button type="button" th:disabled="*{quantity < 1}" class="btn btn-fefault cart"  th:attr="onclick=|addToCart('${products.id}')|" style="text-align: center">
 										<i class="fa fa-shopping-cart"></i>
                                         Thêm vào giỏ hàng
 									</button>
@@ -556,12 +558,13 @@
     </footer><!--/Footer-->
 </div>
 
-<script src="js/jquery.js"></script>
+<script th:src="@{/js/jquery.js}"></script>
 <script src="js/price-range.js"></script>
 <script src="js/jquery.scrollUp.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.prettyPhoto.js"></script>
 <script src="js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script th:src="@{/js/cart.js}"></script>
 
 </body>

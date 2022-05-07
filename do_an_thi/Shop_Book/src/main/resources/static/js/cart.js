@@ -3,8 +3,18 @@ const container = document.querySelector(('.col-sm-9.padding-right'));
 
 function handlePromise(promise) {
     promise
-        .then(result => alert('thanh cong'))
-        .catch(error => alert('that bai'))
+        .then(result => {
+            if (!result.ok) {
+                throw new Error("không đủ hàng")
+            }
+            return result.json();
+        })
+        .then(json => {
+            toastr.success(json.msg)
+        })
+        .catch(error => {
+            toastr.error(error)
+        })
 }
 
 function addToCart(idProduct) {

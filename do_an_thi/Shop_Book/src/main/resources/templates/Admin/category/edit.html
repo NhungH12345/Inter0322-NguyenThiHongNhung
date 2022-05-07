@@ -49,7 +49,7 @@
                     <div class="col-xl-12 col-12 mb-4 mb-xl-0">
                         <h3 class=" text-center mb-3" style="color: red">Sửa loại sách </h3>
                         <form th:action="@{/admin/category/edit-category}" th:object="${categories}" method="post">
-                            <input th:type="hidden" name="id" th:field="*{id}">
+                            <input th:type="hidden" th:field="*{id}">
                             <div class="mb-2 row">
                                 <label class="col-sm-2 col-form-label">Tên loại sách:</label>
                                 <div class="col-sm-8">

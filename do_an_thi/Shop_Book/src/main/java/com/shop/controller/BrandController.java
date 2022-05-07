@@ -59,14 +59,14 @@ public class BrandController {
     @GetMapping("edit-productBrand/{id}")
     public ModelAndView showEditForm(@PathVariable int id) {
         Optional<ProductBrand> productBrands = productBrandService.findProductBrandById(id);
-        if (productBrands != null) {
+        if (productBrands.isPresent()) {
             return new ModelAndView("/Admin/brand/edit", "productBrands", productBrands);
-        } else {
-            return new ModelAndView("/error");
         }
+        return new ModelAndView("/error");
     }
     @PostMapping("/edit-productBrand")
     public ModelAndView updateProductBrand(@ModelAttribute("productBrands") ProductBrand productBrand) {
+        productBrandService.saveProductBrand(productBrand);
         return new ModelAndView("redirect:/admin/brand");
     }
 

@@ -29,7 +29,6 @@ public class ProductBrandServiceImpl implements ProductBrandService {
     @Override
     public void saveProductBrand(ProductBrand productBrand) {
         productBrandRepository.save(productBrand);
-
     }
 
     @Override
@@ -40,7 +39,8 @@ public class ProductBrandServiceImpl implements ProductBrandService {
 
     @Override
     public Optional<ProductBrand> findProductBrandById(int id) {
-        return Optional.empty();
+        // :D
+        return this.productBrandRepository.findById(id);
     }
 
     @Override

@@ -1,15 +1,21 @@
 package com.shop.controller;
 
 import com.shop.model.OrderDetail;
+import com.shop.model.Product;
+import com.shop.repository.ProductRepository;
 import com.shop.service.CartService;
 import com.shop.service.OrderDetailService;
 import com.shop.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/cart")
@@ -19,6 +25,7 @@ public class CartController {
     private final OrderService orderService;
     private final OrderDetailService orderDetailService;
     private final CartService cartService;
+    private final ProductRepository productRepository;
 
     public String getCart(Model model) {
         List<OrderDetail> cart = this.cartService.getCart();
@@ -53,9 +60,22 @@ public class CartController {
 
     @ResponseBody
     @PostMapping("/create")
-    public String addItem(@RequestBody OrderDetail orderDetail) {
+    public ResponseEntity addItem(@RequestBody OrderDetail orderDetail) {
+        int quantity = orderDetail.getQuantity();
+        int id = orderDetail.getProduct().getId();
+        Product product = this.productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("not found product: " + id));
+
+        Long productQuantity = product.getQuantity();
+
+        if (quantity > productQuantity) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\": \"không đủ hàng\"}");
+        }
+
+        product.setQuantity( (productQuantity - quantity) );
+        this.productRepository.save(product);
         this.cartService.addItem(orderDetail);
-        return "";
+        return ResponseEntity.ok("{\"msg\": \"Thêm vào giỏ hàng thành công\"}");
     }
 
     @GetMapping("/delete/{productId}")

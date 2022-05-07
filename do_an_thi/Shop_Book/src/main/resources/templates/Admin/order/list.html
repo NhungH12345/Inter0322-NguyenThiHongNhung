@@ -113,7 +113,7 @@
                                     <td th:text="${order.methodPayment == 0 ? 'Thanh toan khi nhan hang' : 'thanh toan bang the'}"></td>
                                     <td th:text="${order.customerAddress}"></td>
                                     <td th:text="${order.phone}"></td>
-                                    <td th:text="${order.totalPrice}"></td>
+                                    <td th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')}"></td>
                                     <td th:text="${order.status}"></td>
                                     <td>
                                         <button class="btn btn-warning show-detail" th:attr="data-id=${order.id}" role="button">Xem</button>

@@ -8,6 +8,7 @@
 <div th:replace="~{layout/navbar::navbar(~{::#container})}">
     <div id="container">
         <div class="table-responsive" style="text-align: center">
+            <h2 style="color: #5BBCEC; padding-top: 1px; margin-bottom: 28px;">Lịch sử đặt hàng</h2>
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr style="text-align: center">
@@ -26,7 +27,7 @@
                     <td th:text="${order.methodPayment == 0 ? 'Thanh toan khi nhan hang' : 'thanh toan bang the'}"></td>
                     <td th:text="${order.customerAddress}"></td>
                     <td th:text="${order.phone}"></td>
-                    <td th:text="${order.totalPrice}"></td>
+                    <td th:text="${#numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')}"></td>
                     <td th:text="${order.status}"></td>
                 </tr>
                 </tbody>

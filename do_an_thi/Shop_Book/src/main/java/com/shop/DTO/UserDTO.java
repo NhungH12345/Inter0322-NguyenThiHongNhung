@@ -7,7 +7,6 @@ public class UserDTO {
     private String username;
     @NotEmpty(message = "Password không được để trống")
     private String password;
-
     private String email;
 
     private  String firstName;
